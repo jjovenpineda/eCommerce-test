@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { ChevronRight } from "lucide-react";
 
-export default async function Sidebar() {
-  return <>{renderLinks(/* SidebarLinks */)}</>;
+export default function Sidebar() {
+  return <>{renderLinks()}</>;
 }
 
 const renderLinks = async (/* links: links[] */) => {
@@ -22,13 +22,17 @@ const renderLinks = async (/* links: links[] */) => {
           className="pl-4 py-1 hover:bg-slate-100 transition-colors cursor-pointer active:bg-slate-200"
         >
           {!link.subLinks ? (
-            <Link key={index} href={"/products/" + link.id.toString()}>
+            <Link
+              key={index}
+              href={"/products/" + link.id.toString()}
+              className="line-clamp-1"
+            >
               {link.title}
             </Link>
           ) : (
             <Popover>
               <PopoverTrigger className="flex gap-6 items-center w-full">
-                <div className="cursor-pointer">{link.label}</div>
+                <div className="cursor-pointer ">{link.label}</div>
                 <ChevronRight size={20} />
               </PopoverTrigger>
               {/*  <PopoverContent side="right" sideOffset={10} className="p-0">
